@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver Chen | Rutgers Accounting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rutgers-navy: #002147; 
+            --white: #ffffff;
+            --accent-blue: #0071bc;
+            --bg-light: #f4f7f9;
+            --text-dark: #2d3436;
+            /* Internship Tracker Colors */
+            --primary-blue: #70b0ff;
+            --primary-dark-blue: #4a91e1;
+            --success-green: #67D97E;
+            --danger-red: #FF7B7B;
+            --info-blue: #8ACDD7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* HEADER WITHOUT BACKGROUND IMAGE */
+        header {
+            position: relative;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--white);
+            background-color: var(--rutgers-navy); /* Solid Rutgers Navy Background */
+            border-bottom: 5px solid var(--accent-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .header-content {
+            padding: 15px 30px;
+        }
+
+        h1 { margin: 0; font-size: 3rem; }
+        .tagline { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px; }
+
+        .container {
+            max-width: 850px;
+            margin: -40px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            background: var(--white);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: var(--rutgers-navy);
+            border-left: 6px solid var(--accent-blue);
+            padding-left: 18px;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .exp-header { display: flex; justify-content: space-between; font-weight: bold; flex-wrap: wrap; margin-top: 20px; }
+        .company { color: var(--accent-blue); font-style: italic; display: block; margin-bottom: 12px; }
+        ul { color: #444; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        .skill-tag {
+            display: inline-block;
+            background: #e9f2f9;
+            color: var(--rutgers-navy);
+            padding: 7px 18px;
+            border-radius: 25px;
+            margin: 6px 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--rutgers-navy);
+            color: white;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: var(--accent-blue); transform: translateY(-2px); }
+
+        /* TRACKER SPECIFIC STYLES */
+        .internship-section {
+            font-family: 'Fredoka', sans-serif;
+            border: 3px solid var(--primary-blue);
+        }
+
+        .chibi-icon {
+            display: block;
+            margin: 0 auto 10px;
+            width: 120px;
+            height: auto;
+        }
+
+        .tracker-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+            background: rgba(112, 176, 255, 0.08);
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px dashed var(--primary-blue);
+        }
+
+        .tracker-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 3px solid #e1ecf7;
+            border-radius: 15px;
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 5px 0 var(--primary-dark-blue);
+            transition: all 0.1s;
+        }
+
+        .add-btn:active { box-shadow: 0 1px 0 var(--primary-dark-blue); transform: translateY(4px); }
+
+        .tracker-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 20px;
+        }
+
+        .tracker-table th { color: #8fa0b3; text-align: left; padding: 10px; font-size: 0.85rem; }
+        .tracker-table td { background-color: #f9fcff; border-top: 1px solid #e1ecf7; border-bottom: 1px solid #e1ecf7; padding: 15px; }
+
+        .status-pill {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+            background-color: var(--info-blue);
+            box-shadow: 0 3px 0 #6FB4BF;
+            text-transform: uppercase;
+        }
+
+        .result-select {
+            padding: 8px;
+            border-radius: 10px;
+            border: 2px solid #e1ecf7;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .result-accepted { color: var(--success-green); border-color: var(--success-green); }
+        .result-rejected { color: var(--danger-red); border-color: var(--danger-red); }
+
+        footer { text-align: center; padding: 40px; color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="Assets/Assets/ProfilePic.jpg" alt="Oliver Chen" class="profile-img">
+        <div class="header-content">
+            <h1>Oliver Chen</h1>
+            <p class="tagline">Accounting Student | Rutgers University</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Education</h2>
+            <div class="exp-header">
+                <span>Rutgers University</span>
+                <span>September 2023 - Present</span>
+            </div>
+            <span class="company">Candidate for B.S. in Accounting (GPA: 3.3)</span>
+            <p><strong>Relevant Coursework:</strong> Statistics, Operations Management, Marketing, Supply Chain, and Financial Accounting.</p>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <div class="exp-header">
+                    <span>Bookkeeper</span>
+                    <span>July 2025 – Present</span>
+                </div>
+                <span class="company">Gisler, Mahler, Lazoff, Sacharow LLC | Haskell, NJ</span>
+                <ul>
+                    <li>Reconcile accounts using QuickBooks and online banking platforms.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <div class="exp-header">
+                    <span>Bookkeeper</span>
+                    <span>June 2025 – Present</span>
+                </div>
+                <span class="company">Haskell Eye Center | Haskell, NJ</span>
+                <ul>
+                    <li>Managed client records and tracked payments.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <div class="exp-header">
+                    <span>Virtual Office Assistant</span>
+                    <span>September 2023 – September 2025</span>
+                </div>
+                <span class="company">NJ Small Business Development Center | New Brunswick, NJ</span>
+                <ul>
+                    <li>Managed and organized electronic documents and client communications.</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="exp-header">
+                    <span>Cashier / Cook</span>
+                    <span>November 2015 – Present</span>
+                </div>
+                <span class="company">Guan Long Chinese Restaurant | Butler, NJ</span>
+                <ul>
+                    <li>Accurately processed cash and credit transactions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Leadership & Activities</h2>
+            <div class="exp-header">
+                <span>Team Leader</span>
+                <span>Jan 2024 – May 2024</span>
+            </div>
+            <span class="company">Management Skill Course | New Brunswick, NJ</span>
+            <ul>
+                <li>Managed team-based projects, coordinating tasks to ensure deadlines were met.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Technical Skills & Interests</h2>
+            <div class="skill-tag">QuickBooks</div>
+            <div class="skill-tag">Microsoft Excel</div>
+            <div class="skill-tag">Canva</div>
+            <div class="skill-tag">Gym</div>
+            <div class="skill-tag">Cooking</div>
+        </section>
+
+        <section class="internship-section">
+            <img src="Assets/Assets/chibi-businessman.jpg" alt="Chibi Businessman" class="chibi-icon">
+            <h2 style="text-align: center; border: none; padding: 0;">Internship Search Quest</h2>
+            
+            <div class="tracker-form">
+                <div>
+                    <label>Company Name</label>
+                    <input type="text" id="company" placeholder="">
+                </div>
+                <div>
+                    <label>Date Applied</label>
+                    <input type="date" id="date">
+                </div>
+            </div>
+            
+            <button class="add-btn" onclick="addInternship()">Add to Quest Log</button>
+
+            <table class="tracker-table">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Date</th>
+                        <th>Initial Status</th>
+                        <th style="width: 150px;">Final Decision</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </section>
+
+        <section style="text-align: center;">
+            <h2>Connect With Me</h2>
+            <p>186 Bevier Road, Piscataway, NJ 08854</p>
+            <div style="margin: 20px 0;">
+                <a href="mailto:oc186@scarletmail.rutgers.edu" class="btn">Email Me</a>
+            </div>
+            <p style="font-weight: bold; font-size: 1.1rem;">Phone: 267-736-7032</p>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Oliver Chen | Rutgers University Portfolio
+    </footer>
+
+    <script>
+        function addInternship() {
+            const company = document.getElementById('company').value;
+            const dateInput = document.getElementById('date').value;
+
+            if (company === '' || dateInput === '') {
+                alert("Please enter the Company and Date!");
+                return;
+            }
+
+            const dateObj = new Date(dateInput);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            const table = document.getElementById('tableBody');
+            const row = table.insertRow();
+
+            row.innerHTML = `
+                <td><span style="font-weight:bold">${company}</span></td>
+                <td>${formattedDate}</td>
+                <td><span class="status-pill">Submitted</span></td>
+                <td>
+                    <select class="result-select" onchange="this.className = 'result-select result-' + this.value.toLowerCase()">
+                        <option value="">Pending...</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </td>
+            `;
+
+            document.getElementById('company').value = '';
+            document.getElementById('date').value = '';
+        }
+    </script>
+</body>
+</html>
